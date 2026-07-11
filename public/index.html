@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BinTV - Watch Live Sports</title>
+    
+    <!-- SEO & Meta -->
+    <meta name="description" content="Watch live sports streams on BinTV. Join the community chat and stay updated with live matches.">
+    <link rel="icon" type="image/png" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhYV1L0Fo7AK-KVSYgzxUUa3dRlOjSskmzN7w7QUxPz6VQj8dH9BiYPRNICgnOBnbT8EpVY3iyqLKP7Y-9iixr6TXtEDWVhy-jtq-FlEdMqqTfBmt2IrEUAaZMvQLaTOOQdXrjEJHnOPY3TEEAd_sRy9Yc2pp45JpeDnwG-y1wftCdujc_-ZI5uqUzdIQ/s512/letter-b.png">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+    <div class="sticky-wrapper">
+        <header class="header-content">
+            <a href="https://bintv.net/" class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhsQsag_KQPokaomZsgDV4fiXQ_fi494N6wV8cwKyQQuhSnOh1pAl4lV2Ur-yHCG6IFBimoeWaZKiOTQyyEmfYLetghJRbhyoTHZuzfbZ9VOWZV5aNE4L4akyYmk5D1sB-QLzVQLy200JxziBg0Wwetdxb0Ybf7oqv4R1W8t49rsYLsFkLHZuNPL42I8Q/s512/letter-b.png" alt="Logo">
+                <span>BINTV</span>
+            </a>
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" class="search-bar" placeholder="Search matches...">
+            </div>
+            <div></div>
+        </header>
+    </div>
+
+    <main class="player-container">
+        <div class="player-layout">
+            <div class="video-main-column">
+                <div class="video-panel">
+                    <div class="video-player-container">
+                        <iframe id="mainVideoPlayer" src="about:blank" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-title-section">
+                        <h1 class="video-title" id="displayTitle">Live Sports Stream</h1>
+                    </div>
+                    <div class="action-bar">
+                        <div class="action-part" onclick="toggleModal('embedModal')"><i class="fas fa-code"></i> Embed</div>
+                        <div class="action-part" onclick="toggleModal('donateModal')"><i class="fas fa-heart"></i> Donate</div>
+                        <div class="action-part">
+                            <i class="fas fa-eye"></i> <span id="viewerCount" class="ml-1 mr-1">0</span> Viewers
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-chat-section">
+                <iframe src="https://bintvs.fun/" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-text">BINTV is a directory of third-party video content. We do not host any files on our servers.</p>
+    </footer>
+
+    <button class="theme-float" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
+
+    <!-- Modals -->
+    <div id="embedModal" class="modal-overlay" onclick="closeModals(event)">
+        <div class="modal-box">
+            <h3 class="mb-4 font-bold text-lg">Embed Video</h3>
+            <textarea id="embedCode" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white outline-none focus:border-blue-500 transition-all" rows="4" readonly></textarea>
+            <div class="flex gap-3 mt-4">
+                <button class="flex-1 py-3 bg-slate-800 text-white rounded-xl font-semibold" onclick="document.getElementById('embedModal').classList.remove('active')">Close</button>
+                <button class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold" onclick="copyText('embedCode')">Copy Code</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="donateModal" class="modal-overlay" onclick="closeModals(event)">
+        <div class="modal-box text-center">
+            <h3 class="mb-2 font-bold text-lg">Support BinTV</h3>
+            <p class="text-sm text-slate-400 mb-6">Donate to help us keep the servers running.</p>
+            <div class="p-4 bg-slate-900 border border-slate-700 rounded-xl mb-6 text-xs break-all text-yellow-500 font-mono" id="wallet">0xf9f05f39e3a0eeec0da972e5e80d3b8fcd2a8693</div>
+            <button class="primary-btn" onclick="copyText('wallet', true)">Copy Address</button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const newTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+        }
+    </script>
+</body>
+</html>
